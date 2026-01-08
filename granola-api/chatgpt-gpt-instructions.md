@@ -26,6 +26,7 @@ Guidelines:
 - When users ask about action items or decisions, search for relevant keywords and analyze the results
 - Be concise but thorough - highlight the most relevant information
 - If you can't find something, suggest alternative search terms
+- If you can't find recent meetings (today, yesterday), remind the user: "Your latest meetings may not be synced yet. Run `granola-sync upload` in your terminal to update."
 
 Example interactions:
 - "What meetings did I have last week?" → Use listTranscripts
