@@ -34,6 +34,29 @@ Example interactions:
 - "Summarize discussions about hiring" → Search for "hiring", analyze results, provide summary
 
 Always identify which meeting(s) information comes from by citing the meeting title and date.
+
+## First-Time Setup
+
+Before you can search your Granola transcripts, you need to sync them to the cloud. This takes about 2 minutes.
+
+**Requirements:** macOS with Granola installed and logged in, Python 3.9+
+
+**Steps:**
+
+1. **Install the sync tool:**
+   pip3 install git+https://github.com/winsthuang/granola-sync.git
+
+2. **Login and set your password:**
+   granola-sync login --api-url https://granola-api.hazel-health.workers.dev
+   Enter your email and create a password. This password is used when connecting to ChatGPT.
+
+3. **Upload your transcripts:**
+   granola-sync upload
+   This uploads all your Granola meetings to the cloud.
+
+4. **Connect in ChatGPT:** Start using this GPT and sign in with the email and password you just created.
+
+**To sync new meetings later:** Just run `granola-sync upload` again.
 ```
 
 ## Conversation Starters
@@ -45,27 +68,15 @@ Always identify which meeting(s) information comes from by citing the meeting ti
 ## Actions Configuration
 
 1. In the GPT builder, go to "Configure" → "Actions" → "Create new action"
-2. Paste the contents of `openapi.yaml`
-3. Replace the server URL with your actual Cloudflare Worker URL
-4. For Authentication:
-   - Select "API Key"
-   - Auth Type: "Custom"
-   - Header name: `X-API-Key`
-   - You'll need to enter each user's API key (see note below)
-
-## Important: Per-User Authentication
-
-Since each user has their own API key, you have two options:
-
-### Option A: Each user creates their own GPT (recommended for privacy)
-- Share these instructions with your team
-- Each person creates their own Custom GPT
-- Each person enters their own API key in the Action configuration
-
-### Option B: Create a shared GPT (requires additional setup)
-- For a truly shared GPT where each user sees only their data, you'd need to implement OAuth
-- This is more complex and requires additional infrastructure
-- The current API key model means whoever's key is in the GPT config, that's whose data is shown
+2. Import the OpenAPI schema from URL: `https://raw.githubusercontent.com/winsthuang/granola-sync/main/granola-api/openapi.yaml`
+3. For Authentication:
+   - Select "OAuth"
+   - Client ID: `chatgpt`
+   - Client Secret: `not-used`
+   - Authorization URL: `https://granola-api.hazel-health.workers.dev/oauth/authorize`
+   - Token URL: `https://granola-api.hazel-health.workers.dev/oauth/token`
+   - Scope: (leave blank)
+   - Token Exchange Method: `Default (POST request)`
 
 ## Testing the GPT
 
@@ -75,6 +86,5 @@ Since each user has their own API key, you have two options:
    - "Get the full transcript from [meeting name]"
 
 2. If you get errors, check:
-   - Is the API URL correct?
-   - Is the API key entered correctly?
-   - Is your Cloudflare Worker deployed and running?
+   - Have you run `granola-sync login` and `granola-sync upload`?
+   - Is the OAuth configured correctly?
