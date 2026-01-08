@@ -1,33 +1,58 @@
 # Granola Sync
 
-Sync your Granola meeting transcripts to local folders or a cloud API for ChatGPT integration.
+Sync your Granola meeting transcripts to ChatGPT. Search and analyze your meetings with AI.
 
-## Features
+## Setup Guide
 
-- Export Granola transcripts to local markdown files
-- Upload transcripts to a cloud API (Cloudflare Workers)
-- Search transcripts via ChatGPT Custom GPT
-- Per-user data isolation (each person sees only their own transcripts)
+### Prerequisites
+- macOS with [Granola](https://granola.ai) installed and logged in
+- Python 3.9+ (check with `python3 --version`)
 
-## Quick Start
-
-### Local Export Only
+### Step 1: Install the sync tool
 ```bash
-pip3 install ./granola-sync
-granola-sync sync  # Exports to ~/Granola/transcripts/
+pip3 install git+https://github.com/winsthuang/granola-sync.git
 ```
 
-### Cloud + ChatGPT Integration
+### Step 2: Create your account and set a password
 ```bash
-# 1. Deploy the API (see DEPLOYMENT.md)
-# 2. Install and login
-pip3 install ./granola-sync
-granola-sync login --api-url https://your-api.workers.dev
+granola-sync login --api-url https://granola-api.hazel-health.workers.dev
+```
+- Press Enter to accept your Granola email
+- Create a password (you'll use this to sign in via ChatGPT)
+- Confirm the password
 
-# 3. Upload transcripts
+### Step 3: Upload your transcripts
+```bash
 granola-sync upload
+```
+This syncs all your Granola meetings to the cloud. Run this again anytime to sync new meetings.
 
-# 4. Set up ChatGPT Custom GPT (see DEPLOYMENT.md)
+### Step 4: Connect in ChatGPT
+1. Open the GPT (get link from your admin)
+2. Ask it anything (e.g., "Show my recent meetings")
+3. It will prompt you to sign in
+4. Enter your email and the password you created in Step 2
+
+### You're done!
+
+Now you can ask things like:
+- "What meetings did I have this week?"
+- "What did we discuss about [topic]?"
+- "Find mentions of [person/project]"
+- "What were the action items from my last meeting with [person]?"
+
+### Syncing new meetings
+Whenever you want to add new meetings, just run:
+```bash
+granola-sync upload
+```
+
+## Local Export Only
+
+If you just want to export transcripts to local markdown files (no ChatGPT):
+```bash
+pip3 install git+https://github.com/winsthuang/granola-sync.git
+granola-sync sync  # Exports to ~/Granola/transcripts/
 ```
 
 ## Project Structure
