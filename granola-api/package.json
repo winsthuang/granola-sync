@@ -1,0 +1,13 @@
+{
+  "name": "granola-api",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker API for Granola transcript storage and search",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

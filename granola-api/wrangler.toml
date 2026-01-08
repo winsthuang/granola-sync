@@ -1,0 +1,14 @@
+name = "granola-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "TRANSCRIPTS"
+id = "c42f1d6e38b847ff8d728b24b2a66387"
+
+[[kv_namespaces]]
+binding = "USERS"
+id = "30a966f2a25e4d15b0d4ff8b6eaff183"
+
+[vars]
+ENVIRONMENT = "production"

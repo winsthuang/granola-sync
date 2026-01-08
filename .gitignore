@@ -1,0 +1,32 @@
+# Transcripts (contain personal meeting data)
+transcripts/
+*.md
+!README.md
+!DEPLOYMENT.md
+!granola-api/chatgpt-gpt-instructions.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Node
+node_modules/
+.wrangler/
+
+# Config (contains API keys)
+.granola-sync/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

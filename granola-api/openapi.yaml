@@ -1,0 +1,187 @@
+openapi: 3.1.0
+info:
+  title: Granola Transcripts API
+  description: Search and retrieve your meeting transcripts from Granola
+  version: 1.0.0
+servers:
+  - url: https://granola-api.hazel-health.workers.dev
+    description: Hazel Health Granola API
+
+components:
+  securitySchemes:
+    oauth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://granola-api.hazel-health.workers.dev/oauth/authorize
+          tokenUrl: https://granola-api.hazel-health.workers.dev/oauth/token
+          scopes: {}
+
+security:
+  - oauth: []
+
+paths:
+  /api/search:
+    get:
+      operationId: searchTranscripts
+      summary: Search through meeting transcripts
+      description: Search for keywords or phrases across all your meeting transcripts. Returns matching meetings with relevant snippets.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The search query (keywords or phrases to find in transcripts)
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results to return (default 20)
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        date:
+                          type: string
+                        attendees:
+                          type: array
+                          items:
+                            type: string
+                        summary:
+                          type: string
+                        snippets:
+                          type: array
+                          items:
+                            type: string
+                          description: Text snippets showing where the search term appears
+                  total:
+                    type: integer
+                  query:
+                    type: string
+
+  /api/transcripts:
+    get:
+      operationId: listTranscripts
+      summary: List recent meeting transcripts
+      description: Get a list of your recent meetings with titles, dates, and summaries.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: Number of transcripts to return (default 50)
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          required: false
+          description: Offset for pagination
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of transcripts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcripts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        date:
+                          type: string
+                        attendees:
+                          type: array
+                          items:
+                            type: string
+                        summary:
+                          type: string
+                  total:
+                    type: integer
+
+  /api/transcript/{transcriptId}:
+    get:
+      operationId: getTranscript
+      summary: Get full transcript details
+      description: Retrieve the complete transcript including notes and full conversation text.
+      parameters:
+        - name: transcriptId
+          in: path
+          required: true
+          description: The transcript ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Full transcript details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  date:
+                    type: string
+                  attendees:
+                    type: array
+                    items:
+                      type: string
+                  summary:
+                    type: string
+                  notes:
+                    type: string
+                  transcript:
+                    type: string
+                    description: Full transcript text
+
+  /api/stats:
+    get:
+      operationId: getStats
+      summary: Get account statistics
+      description: Get information about your transcript collection.
+      responses:
+        '200':
+          description: Account stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalTranscripts:
+                    type: integer
+                  lastUpdated:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
