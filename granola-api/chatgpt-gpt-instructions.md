@@ -49,15 +49,18 @@ Before you can search your Granola transcripts, you need to sync them to the clo
 
 2. **Login and set your password:**
    granola-sync login --api-url https://granola-api.hazel-health.workers.dev
+
+   If `granola-sync` command is not found, use: `python3 -m granola_sync login --api-url https://granola-api.hazel-health.workers.dev`
    Enter your email and create a password. This password is used when connecting to ChatGPT.
 
 3. **Upload your transcripts:**
    granola-sync upload
+   (or `python3 -m granola_sync upload`)
    This uploads all your Granola meetings to the cloud.
 
 4. **Connect in ChatGPT:** Start using this GPT and sign in with the email and password you just created.
 
-**To sync new meetings later:** Just run `granola-sync upload` again.
+**To sync new meetings later:** Just run `granola-sync upload` (or `python3 -m granola_sync upload`) again.
 ```
 
 ## Conversation Starters
