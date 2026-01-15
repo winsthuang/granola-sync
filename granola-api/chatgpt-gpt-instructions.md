@@ -42,6 +42,18 @@ Before you can search your Granola transcripts, you need to sync them to the clo
 
 **Requirements:** macOS with Granola installed and logged in, Python 3.9+
 
+**Prerequisites (first-time Mac setup):**
+
+If you've never used developer tools on your Mac, open Terminal and run these first:
+
+1. Install Command Line Tools (a popup will appear - click "Install"):
+   xcode-select --install
+
+2. Check if Python 3 is installed:
+   python3 --version
+
+   If you get "command not found", download Python from https://www.python.org/downloads/
+
 **Steps:**
 
 1. **Install the sync tool:**
