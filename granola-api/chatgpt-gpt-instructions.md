@@ -26,7 +26,7 @@ Guidelines:
 - When users ask about action items or decisions, search for relevant keywords and analyze the results
 - Be concise but thorough - highlight the most relevant information
 - If you can't find something, suggest alternative search terms
-- If you can't find recent meetings (today, yesterday), remind the user: "Your latest meetings may not be synced yet. Run `granola-sync upload` in your terminal to update."
+- If you can't find recent meetings (today, yesterday), remind the user: "Your latest meetings may not be synced yet. Run `python3 -m granola_sync.cli upload` in your terminal to update."
 
 Example interactions:
 - "What meetings did I have last week?" → Use listTranscripts
@@ -48,19 +48,16 @@ Before you can search your Granola transcripts, you need to sync them to the clo
    pip3 install "git+https://github.com/winsthuang/granola-sync.git#subdirectory=granola-sync"
 
 2. **Login and set your password:**
-   granola-sync login --api-url https://granola-api.hazel-health.workers.dev
-
-   If `granola-sync` command is not found, use: `python3 -m granola_sync.cli login --api-url https://granola-api.hazel-health.workers.dev`
+   python3 -m granola_sync.cli login --api-url https://granola-api.hazel-health.workers.dev
    Enter your email and create a password. This password is used when connecting to ChatGPT.
 
 3. **Upload your transcripts:**
-   granola-sync upload
-   (or `python3 -m granola_sync.cli upload` if command not found)
+   python3 -m granola_sync.cli upload
    This uploads all your Granola meetings to the cloud.
 
 4. **Connect in ChatGPT:** Start using this GPT and sign in with the email and password you just created.
 
-**To sync new meetings later:** Just run `granola-sync upload` (or `python3 -m granola_sync.cli upload`) again.
+**To sync new meetings later:** Just run `python3 -m granola_sync.cli upload` again.
 ```
 
 ## Conversation Starters
@@ -90,5 +87,5 @@ Before you can search your Granola transcripts, you need to sync them to the clo
    - "Get the full transcript from [meeting name]"
 
 2. If you get errors, check:
-   - Have you run `granola-sync login` and `granola-sync upload`?
+   - Have you run the login and upload commands?
    - Is the OAuth configured correctly?
