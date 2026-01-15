@@ -45,7 +45,7 @@ Before you can search your Granola transcripts, you need to sync them to the clo
 **Steps:**
 
 1. **Install the sync tool:**
-   pip3 install git+https://github.com/winsthuang/granola-sync.git
+   pip3 install "git+https://github.com/winsthuang/granola-sync.git#subdirectory=granola-sync"
 
 2. **Login and set your password:**
    granola-sync login --api-url https://granola-api.hazel-health.workers.dev
