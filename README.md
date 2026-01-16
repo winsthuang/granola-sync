@@ -8,14 +8,20 @@ Sync your Granola meeting transcripts to ChatGPT. Search and analyze your meetin
 - macOS with [Granola](https://granola.ai) installed and logged in
 - Python 3.9+ (check with `python3 --version`)
 
+**First-time Mac setup:** If you've never used developer tools, open Terminal and run:
+```bash
+xcode-select --install
+```
+A popup will appear - click "Install". If Python 3 is missing, download it from https://www.python.org/downloads/
+
 ### Step 1: Install the sync tool
 ```bash
-pip3 install git+https://github.com/winsthuang/granola-sync.git
+pip3 install "git+https://github.com/winsthuang/granola-sync.git#subdirectory=granola-sync"
 ```
 
 ### Step 2: Create your account and set a password
 ```bash
-granola-sync login --api-url https://granola-api.hazel-health.workers.dev
+python3 -m granola_sync.cli login --api-url https://granola-api.hazel-health.workers.dev
 ```
 - Press Enter to accept your Granola email
 - Create a password (you'll use this to sign in via ChatGPT)
@@ -23,7 +29,7 @@ granola-sync login --api-url https://granola-api.hazel-health.workers.dev
 
 ### Step 3: Upload your transcripts
 ```bash
-granola-sync upload
+python3 -m granola_sync.cli upload
 ```
 This syncs all your Granola meetings to the cloud. Run this again anytime to sync new meetings.
 
@@ -44,15 +50,15 @@ Now you can ask things like:
 ### Syncing new meetings
 Whenever you want to add new meetings, just run:
 ```bash
-granola-sync upload
+python3 -m granola_sync.cli upload
 ```
 
 ## Local Export Only
 
 If you just want to export transcripts to local markdown files (no ChatGPT):
 ```bash
-pip3 install git+https://github.com/winsthuang/granola-sync.git
-granola-sync sync  # Exports to ~/Granola/transcripts/
+pip3 install "git+https://github.com/winsthuang/granola-sync.git#subdirectory=granola-sync"
+python3 -m granola_sync.cli sync  # Exports to ~/Granola/transcripts/
 ```
 
 ## Project Structure
@@ -86,15 +92,15 @@ Granola/
 
 ```bash
 # Local operations
-granola-sync status      # Check Granola connection
-granola-sync sync        # Export to local folder
-granola-sync info        # Show local transcript stats
+python3 -m granola_sync.cli status        # Check Granola connection
+python3 -m granola_sync.cli sync          # Export to local folder
+python3 -m granola_sync.cli info          # Show local transcript stats
 
 # Cloud operations
-granola-sync login       # Login to cloud API
-granola-sync upload      # Upload transcripts to cloud
-granola-sync cloud-status # Check cloud connection
-granola-sync logout      # Clear cloud credentials
+python3 -m granola_sync.cli login         # Login to cloud API
+python3 -m granola_sync.cli upload        # Upload transcripts to cloud
+python3 -m granola_sync.cli cloud-status  # Check cloud connection
+python3 -m granola_sync.cli logout        # Clear cloud credentials
 ```
 
 ## Requirements
